@@ -1,10 +1,24 @@
+"use client";
+
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export default function Home() {
+export default function Home({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  const [language, setLanguage] = useState(locale);
+
+  const isRTL = language === "fa";
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <div
+      className={`min-h-screen flex flex-col ${isRTL ? "font-persian" : ""}`}
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      <Header language={language} setLanguage={setLanguage} />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -140,7 +154,11 @@ export default function Home() {
                   demanding requirements of modern healthcare.
                 </p>
                 <div className="space-y-6">
-                  <div className="border-l-4 border-blue-800 pl-6">
+                  <div
+                    className={`border-l-4 border-blue-800 ${
+                      isRTL ? "border-l-0 border-r-4 pr-6" : "pl-6"
+                    }`}
+                  >
                     <h4 className="text-xl font-bold text-gray-800 mb-2">
                       High-Density Electrode Arrays
                     </h4>
@@ -149,7 +167,11 @@ export default function Home() {
                       brain activity mapping
                     </p>
                   </div>
-                  <div className="border-l-4 border-blue-800 pl-6">
+                  <div
+                    className={`border-l-4 border-blue-800 ${
+                      isRTL ? "border-l-0 border-r-4 pr-6" : "pl-6"
+                    }`}
+                  >
                     <h4 className="text-xl font-bold text-gray-800 mb-2">
                       Low-Noise Signal Amplification
                     </h4>
@@ -158,7 +180,11 @@ export default function Home() {
                       accurate data collection
                     </p>
                   </div>
-                  <div className="border-l-4 border-blue-800 pl-6">
+                  <div
+                    className={`border-l-4 border-blue-800 ${
+                      isRTL ? "border-l-0 border-r-4 pr-6" : "pl-6"
+                    }`}
+                  >
                     <h4 className="text-xl font-bold text-gray-800 mb-2">
                       Portable and Stationary Options
                     </h4>
@@ -276,7 +302,7 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }
