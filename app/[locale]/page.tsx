@@ -1,9 +1,10 @@
 import ClientPage from "./client-page";
 
-export default function Page({
-  params: { locale },
+export default async function Page({
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   return <ClientPage locale={locale} />;
 }
